@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+# the type of resource
+kind: Deployment
+metadata:
+    # the name of the deployment
+    name: mongodb-deployment
+    labels:
+        app: mongodb
+# specifications for the deployment
+spec:
+    # how many replicas of the pods
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mongodb
+    template:
+        metadata:
+            labels:
+                app: mongodb
+        # specifications for the pods
+        spec:
+            # 1 container with mongo image binding on port 80
+            # check the mongo image for configuration details
+            containers:
+            - name: mongodb
+              image: mongo
+              ports:
+              - containerPort: 27017
+              env:
+              # Reference the Secret
+              # username and pwd should be written in secret not here
+              - name: MONGO_INITDB_ROOT_USERNAME
+                valueFrom:
+                    secretKeyRef:
+                        name: mongodb-secret
+                        key: mongo-root-username
+              - name: MONGO_INITDB_ROOT_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: mongodb-secret
+                        key: mongo-root-password
+---
+# new document starts for Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: mongodb-service
+# specifications for the service
+spec:
+    # connect to Pod through label
+    selector:
+        app: mongodb
+    ports:
+        # expose Service port to container Port for deployment
+        - protocol: TCP
+          # Service port
+          port: 27017
+          # container Port
+          targetPort: 27017
