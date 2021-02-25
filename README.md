@@ -1,8 +1,10 @@
 # Hello
 This is a place to store all useful knowledge I learnt / codes in smaller assignments during my studies.
 
-> 26th Jan 2021:
-> working on Perceptron
+If you happen to see this repository, be sure to check out my other repositories for my projects.
+
+> 25th Feb 2021:
+> working on RBF
 
 ###### Checklist
 - [ ] Data Science
@@ -16,7 +18,7 @@ This is a place to store all useful knowledge I learnt / codes in smaller assign
     - [x] Gaussian Classifier
     - [x] LDA
     - [x] Linear Regression
-    - [ ] Perceptron
+    - [x] Perceptron
     - [ ] Radial Basis Functions
     - [ ] MLP and back-propagation
     - [ ] Gaussian Mixture Model
